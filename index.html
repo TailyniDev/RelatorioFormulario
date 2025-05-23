@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FashionStyle - Controle de Estoque</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>FashionStyle</h1>
+    </div>
+
+    <div class="input-section">
+      <div class="campo">
+        <label for="cliente">Fornecedor/Cliente:</label>
+        <input type="text" id="cliente" />
+      </div>
+
+      <div class="campo">
+        <label for="responsavel">Responsável:</label>
+        <input type="text" id="responsavel" />
+      </div>
+
+      <div class="campo">
+        <label for="data">Data de Emissão:</label>
+        <input type="date" id="data" />
+      </div>
+
+      <h3>Itens do Estoque</h3>
+      <div id="itens-container">
+        <div class="item-row">
+          <input type="text" class="item-desc" placeholder="Descrição" />
+          <input type="number" class="item-qtd" placeholder="Qtd" />
+          <select class="item-tamanho">
+            <option value="">Tamanho</option>
+            <option value="P">P</option>
+            <option value="M">M</option>
+            <option value="G">G</option>
+          </select>
+          <input type="number" class="item-valor" placeholder="Valor" />
+          <button class="btn-remove" onclick="removerItem(this)">❌</button>
+        </div>
+      </div>
+      <button class="btn-add" onclick="adicionarItem()">+ Adicionar Item</button>
+
+      <div class="campo">
+        <label for="observacoes">Observações:</label>
+        <textarea id="observacoes"></textarea>
+      </div>
+
+      <div class="assinaturas">
+        <div class="campo">
+          <label for="autorizador">Autorizador:</label>
+          <input type="text" id="autorizador" />
+        </div>
+      </div>
+
+      <div class="buttons">
+        <button class="btn" onclick="validarFormulario()">Visualizar Documento</button>
+        <button class="btn" onclick="gerarPDF()">Gerar PDF</button>
+        <button class="btn" onclick="imprimirDocumento()">Imprimir</button>
+        <button class="btn" onclick="limparFormulario()">Limpar Formulário</button>
+      </div>
+    </div>
+
+    <!-- Documento Gerado -->
+    <section id="relatorio">
+      <div class="document-header">
+        <h2>Controle de Estoque</h2>
+        <div class="document-date">
+          <p><strong>Data Atual:</strong> <span id="current-date"></span></p>
+          <p><strong>Data e Hora:</strong> <span id="full-date"></span></p>
+        </div>
+      </div>
+
+      <div class="document-info">
+        <p><strong>Fornecedor/Cliente:</strong> <span id="doc-cliente"></span></p>
+        <p><strong>Responsável:</strong> <span id="doc-responsavel"></span></p>
+        <p><strong>Autorizador:</strong> <span id="doc-autorizador"></span></p>
+        <p><strong>Data de Emissão:</strong> <span id="doc-data"></span></p>
+      </div>
+
+      <table class="itens-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Descrição</th>
+            <th>Tamanho</th>
+            <th>Qtd</th>
+            <th>Valor Unit.</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody id="doc-itens"></tbody>
+      </table>
+
+      <p class="total-label">Total Geral: <span class="total-value" id="doc-total"></span></p>
+
+      <div class="observacoes">
+        <p><strong>Observações:</strong> <span id="doc-observacoes"></span></p>
+      </div>
+    </section>
+
+    <div class="footer">
+      <p>FashionStyle &copy; <span id="year"></span> - Todos os direitos reservados</p>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
